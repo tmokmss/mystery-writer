@@ -1,0 +1,78 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { url, pagePath, titleOf, draftsOf, answerLabel } from '../lib/docs';
+
+const { entry, ids } = Astro.props;
+const { Content } = await render(entry);
+const title = titleOf(entry.body, entry.id.split('/').pop());
+
+const parts = entry.id.split('/');
+const crumbs = [{ label: 'トップ', href: url('') }];
+for (let i = 2; i < parts.length; i++) {
+  const dirId = parts.slice(0, i).join('/') + '/README';
+  if (ids.includes(dirId)) crumbs.push({ label: parts[i - 1], href: url(pagePath(dirId)) });
+}
+
+const experimentDir = /^experiments\/[^/]+\/README$/.test(entry.id) ? entry.id.replace(/\/README$/, '') : null;
+const drafts = experimentDir ? draftsOf(experimentDir, ids) : [];
+const expName = experimentDir?.replace(/^experiments\//, '');
+
+const draftMatch = entry.id.match(/^experiments\/([^/]+)\/drafts\/([^/]+)\/(problem|solution)$/);
+const readHref = draftMatch ? url(`read/${draftMatch[1]}/${draftMatch[2]}.html`) : null;
+---
+<Base title={title} crumbs={crumbs} wide={drafts.length > 0}>
+  {readHref && <p class="read-link"><a href={readHref}>問題編と解決編を続けて読む</a></p>}
+  <article class="prose">
+    <Content />
+  </article>
+
+  {
+    drafts.length > 0 && (
+      <section class="drafts">
+        <h2>稿ごとの原稿と回答</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>稿</th><th>原稿</th><th>解答役・評価役の回答</th></tr>
+            </thead>
+            <tbody>
+              {drafts.map((d) => (
+                <tr>
+                  <td class="v">{d.version}</td>
+                  <td>
+                    <div class="links docs">
+                      {d.problem && d.solution && <a href={url(`read/${expName}/${d.version}.html`)}>読む</a>}
+                      {d.problem && <a href={url(pagePath(d.problem))}>問題編</a>}
+                      {d.solution && <a href={url(pagePath(d.solution))}>解決編</a>}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="links answers">
+                      {d.answers.length === 0 ? (
+                        <span class="none">記録なし</span>
+                      ) : (
+                        d.answers.map((a) => <a href={url(pagePath(a))}>{answerLabel(a)}</a>)
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    )
+  }
+</Base>
+
+<style>
+  .read-link { margin: 0 0 1rem; font-size: .9rem; }
+  .drafts { margin-top: 3rem; }
+  .drafts h2 { font-family: var(--serif); font-size: 1.35rem; border-bottom: 1px solid var(--rule); padding-bottom: .3rem; }
+  .v { font-weight: 700; white-space: nowrap; }
+  .links { display: flex; flex-wrap: wrap; gap: .2rem .8rem; }
+  .docs { flex-wrap: nowrap; white-space: nowrap; }
+  .answers a { white-space: nowrap; font-size: .85rem; }
+  .none { color: var(--muted); font-size: .85rem; }
+</style>

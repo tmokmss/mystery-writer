@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import { allDocs, url, pagePath, titleOf, firstParagraph, draftsOf } from '../lib/docs';
+
+const docs = await allDocs();
+const ids = docs.map((d) => d.id);
+const experiments = docs
+  .filter((d) => /^experiments\/[^/]+\/README$/.test(d.id))
+  .map((d) => {
+    const dir = d.id.replace(/\/README$/, '');
+    const drafts = draftsOf(dir, ids).filter((v) => v.problem && v.solution);
+    return {
+      dir,
+      title: titleOf(d.body, dir),
+      summary: firstParagraph(d.body),
+      href: url(pagePath(d.id)),
+      latest: drafts.at(-1),
+      count: drafts.length,
+    };
+  })
+  .reverse();
+const research = docs
+  .filter((d) => /^research\/[^/]+\/report$/.test(d.id))
+  .map((d) => ({ title: titleOf(d.body, d.id), href: url(pagePath(d.id)), summary: firstParagraph(d.body) }));
+---
+<Base title="mystery-writer" wide>
+  <section class="intro">
+    <p class="eyebrow">EXPERIMENT LOG</p>
+    <h1>AIに短編ミステリーを書かせ、AIに解かせて確かめる</h1>
+    <p>
+      短編ミステリーを書き、問題編だけをHaiku・Sonnet・Opus・Codexに解かせ、解決編まで読んだ評価役に採点させながら改稿した記録です。各実験の原稿は、問題編を読んでから解決編を開けます。
+    </p>
+  </section>
+
+  <h2 class="section-title">実験</h2>
+  <ul class="cards">
+    {
+      experiments.map((e) => (
+        <li class="card">
+          <a class="card-title" href={e.href}>{e.title}</a>
+          <p>{e.summary}</p>
+          <div class="card-links">
+            <a href={e.href}>結論と結果</a>
+            {e.latest && (
+              <a href={url(`read/${e.dir.replace(/^experiments\//, '')}/${e.latest.version}.html`)}>
+                最終稿（{e.latest.version}）を読む
+              </a>
+            )}
+            <span class="meta">{e.count}稿</span>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2 class="section-title">調査</h2>
+  <ul class="cards">
+    {
+      research.map((r) => (
+        <li class="card">
+          <a class="card-title" href={r.href}>{r.title}</a>
+          <p class="clamp">{r.summary}</p>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<style>
+  .intro { padding: 1rem 0 1.5rem; }
+  .intro h1 { font-family: var(--serif); font-size: clamp(1.6rem, 5vw, 2.4rem); line-height: 1.4; margin: .3rem 0 .8rem; text-wrap: balance; }
+  .intro p { color: var(--muted); max-width: 40rem; }
+  .section-title { font-family: var(--serif); font-size: 1.2rem; margin: 2rem 0 .8rem; }
+  .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+  .card { background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 1.1rem 1.2rem; min-width: 0; }
+  .card-title { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
+  .card-title:hover { color: var(--accent); }
+  .card p { margin: .4rem 0 .6rem; color: var(--muted); font-size: .92rem; }
+  .clamp { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .card-links { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; align-items: center; font-size: .9rem; }
+  .meta { color: var(--muted); font-size: .8rem; }
+</style>
