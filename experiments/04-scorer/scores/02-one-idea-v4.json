@@ -1,0 +1,168 @@
+{
+  "draft": "experiments/02-one-idea/drafts/v4",
+  "title": "凪",
+  "mechanical": {
+    "problemChars": 2818,
+    "solutionChars": 1729,
+    "timeMentions": 8,
+    "distinctTimes": 4,
+    "numberMentions": 2,
+    "dialogueRatio": 0.27
+  },
+  "culprit": [
+    "美咲",
+    "姉"
+  ],
+  "core": "毎晩欠かさず父の夜食を作ってきた娘が、殺すつもりだったその夜だけ夜食を作らなかったことが、喧嘩のあとは食べないからという言い訳と過去の行動の矛盾によって犯行を示す。",
+  "nameCount": 4,
+  "names": [
+    "達也",
+    "美咲",
+    "宗一",
+    "岡本"
+  ],
+  "factCount": 12,
+  "facts": [
+    "松葉食堂は九時に閉まる",
+    "父の宗一は毎晩、店を閉めると港へ船を見回りに行き、十時ごろ帰ってきて蠅帳の下の夜食を食べる",
+    "姉の美咲は高校を出て店に入った年から、父の夜食を一晩も休まず作り続けている",
+    "十年前の大喧嘩のあと、美咲は父と一か月口をきかなかったが、父が手もつけないと分かっていても夜食を毎晩作り続けた",
+    "美咲は『それとこれとは別です』と言い、食べないからといって夜食を作るのをやめなかった",
+    "事件の前夜、美咲は夜食を作らなかった",
+    "美咲は夜食を作らなかった理由を『喧嘩のあとだからどうせ食べないと思った』と言ったが、これは達也が先に口にした言い訳に美咲がうなずいたもの",
+    "事件の夜、翌日の煮物の仕込みはいつも通りされていた",
+    "父は店を売ると決め、美咲は黙って受け入れたが、達也の借金のために店を売られることに怒っていた",
+    "岡本は九時半にスナックを出て港へ行き、十時前に先に帰った",
+    "岸壁には柵がなく、嵐の晩は波が足元を洗う",
+    "達也は十一時過ぎに一度スナックを出て、日付が変わるころ店に戻った"
+  ],
+  "unfamiliar": [
+    "蠅帳",
+    "岸壁"
+  ],
+  "staged": {
+    "firstChapterMajority": null,
+    "earlyHitRate": 0,
+    "finalHitRate": 0,
+    "stages": [
+      {
+        "chapter": 1,
+        "of": 6,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "分からない",
+            "confidence": 0
+          },
+          {
+            "who": "分からない",
+            "confidence": 0
+          },
+          {
+            "who": "分からない",
+            "confidence": 0
+          }
+        ]
+      },
+      {
+        "chapter": 2,
+        "of": 6,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "宗一",
+            "confidence": 15
+          },
+          {
+            "who": "宗一",
+            "confidence": 30
+          },
+          {
+            "who": "分からない",
+            "confidence": 5
+          }
+        ]
+      },
+      {
+        "chapter": 3,
+        "of": 6,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "分からない",
+            "confidence": 0
+          },
+          {
+            "who": "宗一",
+            "confidence": 20
+          },
+          {
+            "who": "分からない",
+            "confidence": 0
+          }
+        ]
+      },
+      {
+        "chapter": 4,
+        "of": 6,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "岡本さん",
+            "confidence": 40
+          },
+          {
+            "who": "岡本さん",
+            "confidence": 35
+          },
+          {
+            "who": "岡本",
+            "confidence": 40
+          }
+        ]
+      },
+      {
+        "chapter": 5,
+        "of": 6,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "岡本",
+            "confidence": 30
+          },
+          {
+            "who": "岡本",
+            "confidence": 35
+          },
+          {
+            "who": "岡本さん",
+            "confidence": 35
+          }
+        ]
+      },
+      {
+        "chapter": 6,
+        "of": 6,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "岡本",
+            "confidence": 40
+          },
+          {
+            "who": "岡本さん",
+            "confidence": 40
+          },
+          {
+            "who": "岡本さん",
+            "confidence": 40
+          }
+        ]
+      }
+    ]
+  },
+  "carefulSolver": {
+    "answer": "美咲",
+    "correct": true
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "draft": "experiments/03-howdunit/drafts/v1",
+  "title": "兄の時計",
+  "mechanical": {
+    "problemChars": 1781,
+    "solutionChars": 1173,
+    "timeMentions": 17,
+    "distinctTimes": 8,
+    "numberMentions": 11,
+    "dialogueRatio": 0.23
+  },
+  "culprit": [
+    "ゴトウ",
+    "ゴトウさん",
+    "兄の会社の先輩",
+    "先輩"
+  ],
+  "core": "殺害後、犯人が兄の腕時計を猫の首に巻き、猫の心拍を記録させて死亡時刻を偽装し、自分のアリバイを作った。",
+  "nameCount": 3,
+  "names": [
+    "もち",
+    "ゴトウ",
+    "ミカ"
+  ],
+  "factCount": 12,
+  "facts": [
+    "兄の安静時の心拍は五十八で、兄は毎日それを自慢していた",
+    "猫の心拍は人間の倍以上速い",
+    "もちは毎晩十時ごろ、部屋じゅうを走り回る癖がある（夜の運動会）",
+    "兄はスマートウォッチを先月買い、毎日心拍の話をしていた",
+    "ゴトウは七時過ぎに兄の部屋へ行き、八時四十分ごろに帰った",
+    "ゴトウは九時から日付が変わるまで居酒屋で同僚と飲み、一度も席を外さなかった",
+    "ミカは十一時ごろマンションに来ており、防犯カメラはエントランスのみで部屋の中は映っていない",
+    "腕時計の記録は九時ごろから百五十前後が続き、十時ごろに二百超の山があり、十一時十分に途切れた",
+    "もちの首輪は外されて机の上にあり、首の毛に細い帯状の跡があった",
+    "もちは首のあたりを後ろ足でしきりに掻いていた",
+    "腕時計はベッドの横の床に落ちていた",
+    "ゴトウは車の中で、あの晩兄に心拍の話を見せられたと語った"
+  ],
+  "unfamiliar": [],
+  "staged": {
+    "firstChapterMajority": null,
+    "earlyHitRate": 0,
+    "finalHitRate": 0,
+    "stages": [
+      {
+        "chapter": 1,
+        "of": 5,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "分からない",
+            "confidence": 0
+          },
+          {
+            "who": "分からない",
+            "confidence": 0
+          },
+          {
+            "who": "分からない",
+            "confidence": 0
+          }
+        ]
+      },
+      {
+        "chapter": 2,
+        "of": 5,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "分からない",
+            "confidence": 0
+          },
+          {
+            "who": "分からない",
+            "confidence": 10
+          },
+          {
+            "who": "分からない",
+            "confidence": 0
+          }
+        ]
+      },
+      {
+        "chapter": 3,
+        "of": 5,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "分からない",
+            "confidence": 0
+          },
+          {
+            "who": "分からない",
+            "confidence": 0
+          },
+          {
+            "who": "分からない",
+            "confidence": 5
+          }
+        ]
+      },
+      {
+        "chapter": 4,
+        "of": 5,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "ミカ",
+            "confidence": 40
+          },
+          {
+            "who": "ミカ",
+            "confidence": 55
+          },
+          {
+            "who": "ミカ",
+            "confidence": 55
+          }
+        ]
+      },
+      {
+        "chapter": 5,
+        "of": 5,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "ミカ",
+            "confidence": 55
+          },
+          {
+            "who": "ミカ",
+            "confidence": 40
+          },
+          {
+            "who": "ミカ",
+            "confidence": 45
+          }
+        ]
+      }
+    ]
+  },
+  "carefulSolver": {
+    "answer": "ゴトウ",
+    "correct": true
+  }
+}

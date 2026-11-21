@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+import { allDocs, url, titleOf } from '../lib/docs';
+import pairs from '../../experiments/04-scorer/calibration.json';
+
+const docs = await allDocs();
+const label = (key: string) => {
+  const [exp, version] = key.split('/');
+  const problem = docs.find((d) => d.id === `experiments/${exp}/drafts/${version}/problem`);
+  return { title: titleOf(problem?.body, key), version, exp, href: url(`read/${exp}/${version}.html`) };
+};
+const rows = pairs.map((p) => ({ id: p.id, a: label(p.a), b: label(p.b) }));
+const questions = [
+  { key: 'overall', text: '読んで面白かったのは' },
+  { key: 'surprise', text: '真相が意外だったのは' },
+];
+---
+<Base title="どっちが面白い？" crumbs={[{ label: 'トップ', href: url('') }]}>
+  <article class="prose">
+    <h1>どっちが面白い？</h1>
+    <p>
+      AIの採点器が人間の感じ方と合っているかを確かめるための比較です。読んだことのある組だけで構いません。2作を比べて選び、最後に「回答をコピー」でテキストをチャットに貼ってください。
+    </p>
+  </article>
+
+  <ol class="pairs">
+    {
+      rows.map((r) => (
+        <li class="pair" data-id={r.id}>
+          <div class="works">
+            <a href={r.a.href}>A: {r.a.title}（{r.a.exp} {r.a.version}）</a>
+            <a href={r.b.href}>B: {r.b.title}（{r.b.exp} {r.b.version}）</a>
+          </div>
+          {questions.map((q) => (
+            <div class="q" data-q={q.key}>
+              <span class="qtext">{q.text}</span>
+              <div class="choices" role="group" aria-label={q.text}>
+                {['A', 'B', '未読'].map((c) => (
+                  <button type="button" data-choice={c} aria-pressed="false">{c}</button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </li>
+      ))
+    }
+  </ol>
+
+  <label class="note" for="note">ひとこと（任意）</label>
+  <textarea id="note" rows="3" placeholder="どこが面白かった・分かりにくかった、など"></textarea>
+
+  <div class="actions">
+    <button type="button" id="copy">回答をコピー</button>
+    <span id="status" role="status"></span>
+  </div>
+  <pre id="output" hidden></pre>
+</Base>
+
+<script>
+  const pairs = [...document.querySelectorAll<HTMLElement>('.pair')];
+  for (const group of document.querySelectorAll<HTMLElement>('.choices')) {
+    group.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('button');
+      if (!btn) return;
+      for (const b of group.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b === btn));
+    });
+  }
+  const output = document.getElementById('output')!;
+  const status = document.getElementById('status')!;
+  document.getElementById('copy')!.addEventListener('click', async () => {
+    const lines = pairs.map((p) => {
+      const answers = [...p.querySelectorAll<HTMLElement>('.q')].map((q) => {
+        const chosen = q.querySelector('[aria-pressed="true"]')?.getAttribute('data-choice') ?? '-';
+        return `${q.dataset.q}=${chosen}`;
+      });
+      return `${p.dataset.id}: ${answers.join(' ')}`;
+    });
+    const note = (document.getElementById('note') as HTMLTextAreaElement).value.trim();
+    const text = ['採点器の較正の回答', ...lines, note ? `ひとこと: ${note}` : ''].filter(Boolean).join('\n');
+    output.textContent = text;
+    output.hidden = false;
+    try {
+      await navigator.clipboard.writeText(text);
+      status.textContent = 'コピーしました';
+    } catch {
+      status.textContent = '下のテキストを選択してコピーしてください';
+    }
+  });
+</script>
+
+<style>
+  .pairs { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: 1rem; counter-reset: pair; }
+  .pair { background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.1rem; display: grid; gap: .7rem; min-width: 0; }
+  .works { display: grid; gap: .3rem; font-family: var(--serif); }
+  .q { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
+  .qtext { font-size: .9rem; color: var(--muted); }
+  .choices { display: flex; gap: .4rem; }
+  .choices button, #copy {
+    font: inherit; font-size: .9rem; padding: .35rem .9rem; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--rule); background: var(--bg); color: var(--ink);
+  }
+  .choices button[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  .choices button:focus-visible, #copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .note { display: block; font-size: .9rem; color: var(--muted); margin-top: 1rem; }
+  textarea { width: 100%; font: inherit; padding: .6rem; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); color: var(--ink); }
+  .actions { display: flex; align-items: center; gap: 1rem; margin-top: 1rem; }
+  #copy { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  #status { font-size: .85rem; color: var(--muted); }
+  #output { white-space: pre-wrap; background: var(--paper); border: 1px solid var(--rule); padding: .8rem; border-radius: 6px; font-size: .85rem; }
+</style>
