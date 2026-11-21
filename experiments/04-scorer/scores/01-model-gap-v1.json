@@ -1,0 +1,128 @@
+{
+  "draft": "experiments/01-model-gap/drafts/v1",
+  "title": "二十一時の窓",
+  "mechanical": {
+    "problemChars": 1083,
+    "solutionChars": 371,
+    "timeMentions": 8,
+    "distinctTimes": 7,
+    "numberMentions": 6,
+    "dialogueRatio": 0.35
+  },
+  "culprit": [
+    "青木"
+  ],
+  "core": "ドアの窓からは牧野の席が死角になっているのに、青木は「パソコンに向かっていた」と見たふりの証言をし、九時時点で牧野が無事だったことにしてラーメン屋のレシートでアリバイを作った。",
+  "nameCount": 5,
+  "names": [
+    "牧野",
+    "坂井",
+    "霧島",
+    "千田",
+    "青木"
+  ],
+  "factCount": 11,
+  "facts": [
+    "牧野の机はドアを入ってすぐ右、廊下側の壁に向かって置かれている",
+    "ドアには顔の高さに小さなガラス窓があり、そこから見えるのは部屋の奥側だけで、牧野の席は死角になる",
+    "ほかの学生の机は奥の窓際に並んでいる",
+    "牧野は誰か入ってくるたびに振り向かなければならない配置にあり、よく愚痴をこぼしていた",
+    "青木は廊下向かいの実験室で九時ちょうどまで片付けをし、帰りにドアの窓から覗いて牧野はパソコンに向かっていたと証言した",
+    "青木のラーメン屋のレシートは21時18分で、四号館から駅前まで徒歩15分かかる",
+    "坂井は20時30分に帰り、そのとき牧野は振り向いて返事をした",
+    "SSDは銀色で猫のステッカーつき、ステッカーは去年の忘年会で坂井が全員に配ったもの",
+    "千田は19時から22時まで一階の図書室に一人でいて、証明する人はいない",
+    "千田は牧野と学会の発表を巡って揉めていた",
+    "牧野は犯人を見ておらず、坂井に声をかけられたあとしばらくデータを整理していたことまでしか覚えていない"
+  ],
+  "unfamiliar": [
+    "外付けSSD"
+  ],
+  "staged": {
+    "firstChapterMajority": null,
+    "earlyHitRate": 0,
+    "finalHitRate": 0,
+    "stages": [
+      {
+        "chapter": 1,
+        "of": 4,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "坂井",
+            "confidence": 35
+          },
+          {
+            "who": "坂井",
+            "confidence": 40
+          },
+          {
+            "who": "坂井",
+            "confidence": 35
+          }
+        ]
+      },
+      {
+        "chapter": 2,
+        "of": 4,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "千田",
+            "confidence": 30
+          },
+          {
+            "who": "千田",
+            "confidence": 35
+          },
+          {
+            "who": "千田",
+            "confidence": 35
+          }
+        ]
+      },
+      {
+        "chapter": 3,
+        "of": 4,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "千田",
+            "confidence": 35
+          },
+          {
+            "who": "千田",
+            "confidence": 45
+          },
+          {
+            "who": "千田",
+            "confidence": 40
+          }
+        ]
+      },
+      {
+        "chapter": 4,
+        "of": 4,
+        "hitRate": 0,
+        "guesses": [
+          {
+            "who": "千田",
+            "confidence": 40
+          },
+          {
+            "who": "千田",
+            "confidence": 40
+          },
+          {
+            "who": "千田",
+            "confidence": 40
+          }
+        ]
+      }
+    ]
+  },
+  "carefulSolver": {
+    "answer": "千田",
+    "correct": false
+  }
+}
