@@ -12,7 +12,12 @@ export const firstParagraph = (body: string | undefined) =>
     ?.split(/\n\s*\n/)
     .map((p) => p.trim())
     .find((p) => p && !p.startsWith('#') && !p.startsWith('-') && !p.startsWith('|'))
-    ?.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') ?? '';
+    ?.split('\n')
+    .filter((line) => !/^\s*[-*] /.test(line))
+    .join('')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1') ?? '';
 
 export async function allDocs() {
   return (await getCollection('docs')).sort((a, b) => a.id.localeCompare(b.id));
