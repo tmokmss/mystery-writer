@@ -4,5 +4,6 @@ AIに短編ミステリーを書かせ、AIの解答役・評価役で確かめ�
 
 - `experiments/`: 実験ごとの原稿・結果・プロンプト。各ディレクトリのREADMEに結論を書く。原稿は `drafts/<稿>/problem.md`・`solution.md`、回答は `drafts/<稿>/answers/` に置くと、サイトの稿ごとの表と「読む」ページに載る。
 - `research/`: 実験の土台にした調査の報告とメモ。
+- `scripts/writer_guide.md`: 書く・直すときの手順（人物ごとの表、場面と要約）。評価役の質問は `scripts/judge_prompt.md`、読者役の手順は `scripts/reader_prompt.md`。
 - `scripts/run_codex.sh`: 問題編をCodex CLIに解かせる。`scripts/run_codex.sh <problem.md> <出力ディレクトリ> [回数]`
 - `src/`: サイト（Astro）。`npm install` のあと `npm run dev` で手元に表示できる。mainへのpushでGitHub Pagesに公開される。
