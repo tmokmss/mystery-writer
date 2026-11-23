@@ -2,6 +2,7 @@
 
 AIに短編ミステリーを書かせ、AIの解答役・評価役で確かめる実験の記録。原稿と結果は https://tmokmss.github.io/mystery-writer/ で読める。
 
+- `CLAUDE.md`: 新作を書いて評価し、記録するまでの手順。
 - `experiments/`: 実験ごとの原稿・結果・プロンプト。各ディレクトリのREADMEに結論を書く。原稿は `drafts/<稿>/problem.md`・`solution.md`、回答は `drafts/<稿>/answers/` に置くと、サイトの稿ごとの表と「読む」ページに載る。
 - `research/`: 実験の土台にした調査の報告とメモ。
 - `scripts/writer_guide.md`: 書く・直すときの手順（人物ごとの表、場面と要約）。評価役の質問は `scripts/judge_prompt.md`、読者役の手順は `scripts/reader_prompt.md`。
